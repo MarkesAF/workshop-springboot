@@ -1,8 +1,10 @@
 package com.marques.projeto.config;
 
+import com.marques.projeto.entities.Categoria;
 import com.marques.projeto.entities.Pedido;
 import com.marques.projeto.entities.User;
 import com.marques.projeto.enums.PedidoStatus;
+import com.marques.projeto.repository.CategoriaRepository;
 import com.marques.projeto.repository.PedidoRepository;
 import com.marques.projeto.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,9 +25,17 @@ public class TestConfig implements CommandLineRunner {
     @Autowired
     private PedidoRepository repository;
 
+    @Autowired
+    private CategoriaRepository catRepostory;
 
     @Override
     public void run(String... args) throws Exception {
+
+        Categoria c1 = new Categoria(null, "Eletronicos");
+        Categoria c2 = new Categoria(null, "Livros");
+        Categoria c3 = new Categoria(null, "Computadores");
+
+        catRepostory.saveAll(Arrays.asList(c1,c2,c3));
 
         User u1 = new User(null, "Alex", "alex@gmail.com","98233445","password");
         User u2 = new User(null, "Bob", "bob@gmail.com","88252345","senha");
