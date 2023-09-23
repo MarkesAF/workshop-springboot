@@ -1,6 +1,8 @@
 package com.marques.projeto.entities;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.marques.projeto.enums.PedidoStatus;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
@@ -16,8 +18,10 @@ public class Pedido implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss",timezone = "GMT")
     private Instant moment;
 
+    private Integer status;
 
     @ManyToOne
     @JoinColumn(name = "client_id")
@@ -26,9 +30,10 @@ public class Pedido implements Serializable {
     public Pedido(){
     }
 
-    public Pedido(Long id, Instant moment, User client) {
+    public Pedido(Long id, Instant moment,PedidoStatus status, User client) {
         this.id = id;
         this.moment = moment;
+        setStatus(status);
         this.client = client;
     }
 
@@ -54,6 +59,16 @@ public class Pedido implements Serializable {
 
     public void setClient(User client) {
         this.client = client;
+    }
+
+    public PedidoStatus getStatus() {
+        return PedidoStatus.valueOf(status);
+    }
+
+    public void setStatus(PedidoStatus status) {
+        if(status != null){
+            this.status = status.getCode();
+        }
     }
 
     @Override
