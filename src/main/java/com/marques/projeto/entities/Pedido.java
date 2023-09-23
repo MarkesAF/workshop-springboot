@@ -1,5 +1,6 @@
 package com.marques.projeto.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
@@ -17,9 +18,13 @@ public class Pedido implements Serializable {
     private Long id;
     private Instant moment;
 
+
     @ManyToOne
     @JoinColumn(name = "client_id")
     private User client;
+
+    public Pedido(){
+    }
 
     public Pedido(Long id, Instant moment, User client) {
         this.id = id;
