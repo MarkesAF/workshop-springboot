@@ -24,14 +24,15 @@ public class PedidoItem {
         this.price = price;
     }
 
-
+    @JsonIgnore
     public Pedido getPedido(){
         return id.getPedido();
     }
     public void setPedido(Pedido pedido){
         id.setPedido(pedido);
     }
-    @JsonIgnore
+
+
     public Produto getProduto(){
         return id.getProduto();
     }
@@ -56,6 +57,10 @@ public class PedidoItem {
         this.price = price;
     }
 
+
+    public Double getSubTotal(){
+        return price * quantity;
+    }
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

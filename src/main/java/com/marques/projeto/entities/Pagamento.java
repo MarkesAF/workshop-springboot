@@ -1,5 +1,7 @@
 package com.marques.projeto.entities;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
@@ -14,8 +16,10 @@ public class Pagamento implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private Instant moment;
 
+    @JsonIgnore
     @OneToOne
     @MapsId
     private Pedido pedido;

@@ -60,8 +60,8 @@ public class TestConfig implements CommandLineRunner {
         User u2 = new User(null, "Bob", "bob@gmail.com","88252345","senha");
 
 
-        Pedido p1 = new Pedido(null, Instant.parse("2023-07-20T19:02:20Z"), PedidoStatus.DELIVERED,u1);
-        Pedido p2 = new Pedido(null, Instant.parse("2023-05-10T15:08:20Z"),PedidoStatus.CANCEL,u2);
+        Pedido p1 = new Pedido(null, Instant.parse("2023-07-20T19:02:20Z"), PedidoStatus.PAID,u1);
+        Pedido p2 = new Pedido(null, Instant.parse("2023-05-10T15:08:20Z"),PedidoStatus.WAITING_PAYMENT,u2);
         Pedido p3 = new Pedido(null, Instant.parse("2022-11-30T21:02:20Z"),PedidoStatus.PAID,u1);
 
         rep.saveAll(Arrays.asList(u1,u2));
@@ -77,7 +77,7 @@ public class TestConfig implements CommandLineRunner {
         piRepository.saveAll(Arrays.asList(pi1,pi2,pi3,pi4));
 
 
-        Pagamento pag1 = new Pagamento(null,Instant.parse("2023-07-20T21:02:20Z"),p1);
+        Pagamento pag1 = new Pagamento(null,Instant.parse("2023-07-21T23:02:20Z"),p1);
         p1.setPagamento(pag1);
         repository.save(p1);
     }
