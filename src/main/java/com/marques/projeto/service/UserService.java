@@ -3,8 +3,11 @@ package com.marques.projeto.service;
 
 import com.marques.projeto.entities.User;
 import com.marques.projeto.repository.UserRepository;
+import com.marques.projeto.service.exceptions.DatabaseException;
 import com.marques.projeto.service.exceptions.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
@@ -29,7 +32,13 @@ public class UserService {
     }
 
     public void deleteById(Long id){
-        repository.deleteById(id);
+        try{
+            repository.deleteById(id);
+        }catch (EmptyResultDataAccessException e){
+            throw new ResourceNotFoundException(id);
+        }catch(DataIntegrityViolationException e){
+            throw new DatabaseException(e.getMessage());
+        }
     }
 
     public User update(Long id,User obj){
