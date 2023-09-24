@@ -1,6 +1,7 @@
 package com.marques.projeto.entities;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
@@ -25,6 +26,9 @@ public class Produto implements Serializable {
     @ManyToMany
     @JoinTable(name = "tb_produto_categoria",joinColumns = @JoinColumn(name = "id_produto"),inverseJoinColumns = @JoinColumn(name = "id_categoria"))
     private Set<Categoria> categorias = new HashSet<>();
+
+    @OneToMany(mappedBy = "id.produto")
+    private Set<PedidoItem> items = new HashSet<>();
 
     public Produto(){
     }
@@ -79,6 +83,15 @@ public class Produto implements Serializable {
 
     public Set<Categoria> getCategorias() {
         return categorias;
+    }
+
+    @JsonIgnore
+    public Set<Pedido> getPedidos() {
+        Set<Pedido> set = new HashSet<>();
+        for(PedidoItem x : items){
+            set.add(x.getPedido());
+        }
+        return set;
     }
 
     @Override
