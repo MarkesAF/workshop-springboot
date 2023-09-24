@@ -2,10 +2,12 @@ package com.marques.projeto.config;
 
 import com.marques.projeto.entities.Categoria;
 import com.marques.projeto.entities.Pedido;
+import com.marques.projeto.entities.Produto;
 import com.marques.projeto.entities.User;
 import com.marques.projeto.enums.PedidoStatus;
 import com.marques.projeto.repository.CategoriaRepository;
 import com.marques.projeto.repository.PedidoRepository;
+import com.marques.projeto.repository.ProdutoRepository;
 import com.marques.projeto.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -28,6 +30,9 @@ public class TestConfig implements CommandLineRunner {
     @Autowired
     private CategoriaRepository catRepostory;
 
+    @Autowired
+    private ProdutoRepository produtoRepository;
+
     @Override
     public void run(String... args) throws Exception {
 
@@ -36,6 +41,15 @@ public class TestConfig implements CommandLineRunner {
         Categoria c3 = new Categoria(null, "Computadores");
 
         catRepostory.saveAll(Arrays.asList(c1,c2,c3));
+
+        Produto pr1 = new Produto(null, "The Lord of the Rings", "Lorem ipsum dolor sit amet, consectetur.", 90.5, "");
+        Produto pr2 = new Produto(null, "Smart TV", "Nulla eu imperdiet purus. Maecenas ante.", 2190.0, "");
+        Produto pr3 = new Produto(null, "Macbook Pro", "Nam eleifend maximus tortor, at mollis.", 1250.0, "");
+        Produto pr4 = new Produto(null, "PC Gamer", "Donec aliquet odio ac rhoncus cursus.", 1200.0, "");
+        Produto pr5 = new Produto(null, "Rails for Dummies", "Cras fringilla convallis sem vel faucibus.", 100.99, "");
+
+        produtoRepository.saveAll(Arrays.asList(pr1,pr2,pr3,pr4,pr5));
+
 
         User u1 = new User(null, "Alex", "alex@gmail.com","98233445","password");
         User u2 = new User(null, "Bob", "bob@gmail.com","88252345","senha");

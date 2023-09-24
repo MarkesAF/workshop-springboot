@@ -3,7 +3,7 @@ package com.marques.projeto.entities;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
-import java.util.Objects;
+import java.util.*;
 
 @Entity
 @Table(name = "tb_categoria")
@@ -15,6 +15,9 @@ public class Categoria implements Serializable {
     private Long id;
 
     private String name;
+
+    @Transient
+    private Set<Produto> produtos = new HashSet<>();
 
     public Categoria(){
     }
@@ -38,6 +41,10 @@ public class Categoria implements Serializable {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public Set<Produto> getProdutos() {
+        return produtos;
     }
 
     @Override
