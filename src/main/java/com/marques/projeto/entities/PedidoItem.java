@@ -1,5 +1,6 @@
 package com.marques.projeto.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.marques.projeto.entities.pk.PedidoItemPK;
 import jakarta.persistence.*;
 
@@ -9,7 +10,7 @@ import java.util.Objects;
 @Table(name = "tb_pedido_item")
 public class PedidoItem {
     @EmbeddedId
-    private PedidoItemPK id;
+    private PedidoItemPK id = new PedidoItemPK();
     private Integer quantity;
     private Double price;
 
@@ -23,6 +24,7 @@ public class PedidoItem {
         this.price = price;
     }
 
+    @JsonIgnore
     public Pedido getPedido(){
         return id.getPedido();
     }

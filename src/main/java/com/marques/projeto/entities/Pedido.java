@@ -8,7 +8,9 @@ import jakarta.persistence.*;
 import java.io.Serializable;
 import java.time.Instant;
 import java.time.LocalDateTime;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
 @Table(name = "tb_pedido")
@@ -26,6 +28,9 @@ public class Pedido implements Serializable {
     @ManyToOne
     @JoinColumn(name = "client_id")
     private User client;
+
+    @OneToMany(mappedBy = "id.pedido")
+    private Set<PedidoItem> items = new HashSet<>();
 
     public Pedido(){
     }
@@ -63,6 +68,10 @@ public class Pedido implements Serializable {
 
     public PedidoStatus getStatus() {
         return PedidoStatus.valueOf(status);
+    }
+
+    public Set<PedidoItem> getItems() {
+        return items;
     }
 
     public void setStatus(PedidoStatus status) {
