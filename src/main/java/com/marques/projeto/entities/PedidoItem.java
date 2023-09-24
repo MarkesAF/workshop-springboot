@@ -24,7 +24,7 @@ public class PedidoItem {
         this.price = price;
     }
 
-    
+
     public Pedido getPedido(){
         return id.getPedido();
     }

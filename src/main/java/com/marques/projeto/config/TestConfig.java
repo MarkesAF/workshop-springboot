@@ -75,6 +75,11 @@ public class TestConfig implements CommandLineRunner {
         PedidoItem pi4 = new PedidoItem(p3,pr5,2,pr5.getPreco());
 
         piRepository.saveAll(Arrays.asList(pi1,pi2,pi3,pi4));
+
+
+        Pagamento pag1 = new Pagamento(null,Instant.parse("2023-07-20T21:02:20Z"),p1);
+        p1.setPagamento(pag1);
+        repository.save(p1);
     }
 
 }
